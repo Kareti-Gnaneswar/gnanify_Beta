@@ -1,14 +1,15 @@
+// index.js
 import React from "react";
-import ReactDOM from "react-dom/client"; // Import createRoot from React 18
-import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom/client";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 
-// Get the root element
-const root = document.getElementById("root");
-
-// Use ReactDOM.createRoot instead of ReactDOM.render
-ReactDOM.createRoot(root).render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <BrowserRouter>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </BrowserRouter>
 );

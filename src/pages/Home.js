@@ -1,13 +1,10 @@
-
-// App.js
+// src/App.js
 import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { AuthContext } from "./context/AuthContext"; // 👈 import context
+import { AuthContext } from "./context/AuthContext";
 
 // Components
 import Navbar from "./components/Navbar";
-import Slogan from "./components/Slogan";
-import Footer from "./components/Footer";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Profile from "./pages/Profile";
@@ -19,11 +16,12 @@ import VideoList from "./components/VideoList";
 import Resources from "./components/Resources";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
+import Home from "./pages/Home"; // ✅ Import the new Home
 
 import "./styles/App.css";
 
 function App() {
-  const { user, logout } = useContext(AuthContext); // 👈 use context here
+  const { user, logout } = useContext(AuthContext);
 
   const [adminAuthenticated, setAdminAuthenticated] = React.useState(false);
 
@@ -46,22 +44,11 @@ function App() {
 
   return (
     <div className="app-container">
-      <Navbar />
+      <Navbar isLoggedIn={!!user} onLogout={logout} />
 
       <Routes>
-        {/* Public Home Page */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Slogan />
-              <Blogs />
-              <VideoList />
-              <Founder />
-              <Footer />
-            </>
-          }
-        />
+        {/* Home page handled by Home.js now */}
+        <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blogs" element={<Blogs />} />
